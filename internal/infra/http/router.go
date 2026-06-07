@@ -49,6 +49,11 @@ func Router(cont container.Container) http.Handler {
 				apiRouter.Use(cont.AuthMw)
 
 				UserRouter(apiRouter, cont.UserController)
+				OrganizationRouter(apiRouter, cont.OrganizationController)
+				RoomRouter(apiRouter, cont.RoomController)
+				DeviceRouter(apiRouter, cont.DeviceController)
+				MeasurementRouter(apiRouter, cont.MeasurementController)
+				EventRouter(apiRouter, cont.EventController)
 				apiRouter.Handle("/*", NotFoundJSON())
 			})
 		})
@@ -97,6 +102,67 @@ func UserRouter(r chi.Router, uc controllers.UserController) {
 			"/",
 			uc.Delete(),
 		)
+	})
+}
+
+func OrganizationRouter(r chi.Router, oc controllers.OrganizationController) {
+	r.Route("/organizations", func(apiRouter chi.Router) {
+		apiRouter.Get("/", oc.FindAll())
+		apiRouter.Post("/", oc.Save())
+		apiRouter.Route("/{id}", func(orgRouter chi.Router) {
+			orgRouter.Get("/", oc.Find())
+			orgRouter.Put("/", oc.Update())
+			orgRouter.Delete("/", oc.Delete())
+		})
+	})
+}
+
+func RoomRouter(r chi.Router, rc controllers.RoomController) {
+	r.Route("/organizations/{orgId}/rooms", func(apiRouter chi.Router) {
+		apiRouter.Get("/", rc.FindByOrg())
+		apiRouter.Post("/", rc.Save())
+		apiRouter.Route("/{id}", func(roomRouter chi.Router) {
+			roomRouter.Get("/", rc.Find())
+			roomRouter.Put("/", rc.Update())
+			roomRouter.Delete("/", rc.Delete())
+		})
+	})
+}
+
+func DeviceRouter(r chi.Router, dc controllers.DeviceController) {
+	r.Route("/organizations/{orgId}/devices", func(apiRouter chi.Router) {
+		apiRouter.Get("/", dc.FindByOrg())
+		apiRouter.Post("/", dc.Save())
+		apiRouter.Get("/rooms/{roomId}", dc.FindByRoom())
+		apiRouter.Route("/{id}", func(devRouter chi.Router) {
+			devRouter.Get("/", dc.Find())
+			devRouter.Put("/", dc.Update())
+			devRouter.Delete("/", dc.Delete())
+		})
+	})
+}
+
+func MeasurementRouter(r chi.Router, mc controllers.MeasurementController) {
+	r.Route("/devices/{devId}/measurements", func(apiRouter chi.Router) {
+		apiRouter.Get("/", mc.FindByDevice())
+		apiRouter.Post("/", mc.Save())
+		apiRouter.Route("/{id}", func(mRouter chi.Router) {
+			mRouter.Get("/", mc.Find())
+			mRouter.Put("/", mc.Update())
+			mRouter.Delete("/", mc.Delete())
+		})
+	})
+}
+
+func EventRouter(r chi.Router, ec controllers.EventController) {
+	r.Route("/devices/{devId}/events", func(apiRouter chi.Router) {
+		apiRouter.Get("/", ec.FindByDevice())
+		apiRouter.Post("/", ec.Save())
+		apiRouter.Route("/{id}", func(eRouter chi.Router) {
+			eRouter.Get("/", ec.Find())
+			eRouter.Put("/", ec.Update())
+			eRouter.Delete("/", ec.Delete())
+		})
 	})
 }
 

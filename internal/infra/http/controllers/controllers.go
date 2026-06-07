@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
+	"github.com/go-chi/chi/v5"
 )
 
 /* should not use built-in type string as key for value;
@@ -115,4 +117,12 @@ func Unauthorized(w http.ResponseWriter, err error) {
 	w.WriteHeader(http.StatusUnauthorized)
 
 	encodeErrorBody(w, err)
+}
+
+func parseIdFromUrl(r *http.Request) (uint64, error) {
+	idStr := chi.URLParam(r, "id")
+	if idStr == "" {
+		return 0, fmt.Errorf("missing id parameter")
+	}
+	return strconv.ParseUint(idStr, 10, 64)
 }
