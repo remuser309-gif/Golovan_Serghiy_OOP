@@ -1,0 +1,727 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "IoT Device Management API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"token\", jsonData.token);",
+									"pm.environment.set(\"userId\", jsonData.user.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Test\",\n    \"secondName\": \"User\",\n    \"email\": \"test@test.com\",\n    \"password\": \"test1234\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "register"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"token\", jsonData.token);",
+									"pm.environment.set(\"userId\", jsonData.user.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": { "type": "noauth" },
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@test.com\",\n    \"password\": \"test1234\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "login"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": ["pm.environment.set(\"token\", null);"],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "logout"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": ["{{base_url}}"],
+							"path": ["users"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Updated\",\n    \"secondName\": \"User\",\n    \"email\": \"test@test.com\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": ["{{base_url}}"],
+							"path": ["users"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": ["{{base_url}}"],
+							"path": ["users"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Organizations",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"orgId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"SmartHome Lab\",\n    \"description\": \"Smart home laboratory\",\n    \"city\": \"Kyiv\",\n    \"address\": \"Shevchenka St, 12\",\n    \"lat\": 50.45,\n    \"lon\": 30.52\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/organizations",
+							"host": ["{{base_url}}"],
+							"path": ["organizations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations",
+							"host": ["{{base_url}}"],
+							"path": ["organizations"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"SmartHome Lab Updated\",\n    \"description\": \"Updated description\",\n    \"city\": \"Lviv\",\n    \"address\": \"Shevchenka St, 15\",\n    \"lat\": 49.84,\n    \"lon\": 24.03\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rooms",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"roomId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Server Room\",\n    \"description\": \"Main server room\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/rooms",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "rooms"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List By Organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/rooms",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "rooms"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/rooms/{{roomId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "rooms", "{{roomId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Room\",\n    \"description\": \"Updated description\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/rooms/{{roomId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "rooms", "{{roomId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/rooms/{{roomId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "rooms", "{{roomId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Devices",
+			"item": [
+				{
+					"name": "Create SENSOR",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"devId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"organizationId\": {{orgId}},\n    \"roomId\": {{roomId}},\n    \"inventoryNumber\": \"INV-001\",\n    \"serialNumber\": \"SN-001\",\n    \"characteristics\": \"Temperature sensor\",\n    \"category\": \"SENSOR\",\n    \"units\": \"Celsius\",\n    \"powerConsumption\": 0.5\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ACTUATOR",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"actId\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"organizationId\": {{orgId}},\n    \"roomId\": {{roomId}},\n    \"inventoryNumber\": \"INV-002\",\n    \"serialNumber\": \"SN-002\",\n    \"characteristics\": \"Smart relay\",\n    \"category\": \"ACTUATOR\",\n    \"units\": \"Percent\",\n    \"powerConsumption\": 2.0\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List By Organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter By Category (SENSOR)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices?category=SENSOR",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices"],
+							"query": [
+								{ "key": "category", "value": "SENSOR" }
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List By Room",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices/rooms/{{roomId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices", "rooms", "{{roomId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices/{{devId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices", "{{devId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"organizationId\": {{orgId}},\n    \"roomId\": {{roomId}},\n    \"inventoryNumber\": \"INV-001-UPD\",\n    \"serialNumber\": \"SN-001-UPD\",\n    \"characteristics\": \"Updated sensor\",\n    \"category\": \"SENSOR\",\n    \"units\": \"Celsius\",\n    \"powerConsumption\": 1.0\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices/{{devId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices", "{{devId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/organizations/{{orgId}}/devices/{{devId}}",
+							"host": ["{{base_url}}"],
+							"path": ["organizations", "{{orgId}}", "devices", "{{devId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Measurements",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"value\": 23.5\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/measurements",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "measurements"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List By Device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/measurements",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "measurements"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter By Date Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/measurements?from=2026-01-01T00:00:00Z&to=2026-12-31T23:59:59Z",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "measurements"],
+							"query": [
+								{ "key": "from", "value": "2026-01-01T00:00:00Z" },
+								{ "key": "to", "value": "2026-12-31T23:59:59Z" }
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/measurements/{{measId}}",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "measurements", "{{measId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"value\": 25.0\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/measurements/{{measId}}",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "measurements", "{{measId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/measurements/{{measId}}",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "measurements", "{{measId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"action\": \"Device activated\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/events",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "events"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List By Device",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/events",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "events"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter By Action",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/events?action=Device activated",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "events"],
+							"query": [
+								{ "key": "action", "value": "Device activated" }
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter By Date Range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/events?from=2026-01-01T00:00:00Z&to=2026-12-31T23:59:59Z",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "events"],
+							"query": [
+								{ "key": "from", "value": "2026-01-01T00:00:00Z" },
+								{ "key": "to", "value": "2026-12-31T23:59:59Z" }
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/events/{{eventId}}",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "events", "{{eventId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"action\": \"Device deactivated\"\n}",
+							"options": { "raw": { "language": "json" } }
+						},
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/events/{{eventId}}",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "events", "{{eventId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/devices/{{devId}}/events/{{eventId}}",
+							"host": ["{{base_url}}"],
+							"path": ["devices", "{{devId}}", "events", "{{eventId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [""]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [""]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		}
+	]
+}
