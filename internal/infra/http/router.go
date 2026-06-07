@@ -29,6 +29,30 @@ func Router(cont container.Container) http.Handler {
 		MaxAge:           300,
 	}))
 
+	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"service": "IoT Device Management API",
+			"version": "v1",
+			"endpoints": []string{
+				"GET  /api/ping",
+				"POST /api/v1/auth/register",
+				"POST /api/v1/auth/login",
+				"GET  /api/v1/organizations",
+				"POST /api/v1/organizations",
+				"GET  /api/v1/organizations/{orgId}/rooms",
+				"POST /api/v1/organizations/{orgId}/rooms",
+				"GET  /api/v1/organizations/{orgId}/devices",
+				"POST /api/v1/organizations/{orgId}/devices",
+				"GET  /api/v1/devices/{devId}/measurements",
+				"POST /api/v1/devices/{devId}/measurements",
+				"GET  /api/v1/devices/{devId}/events",
+				"POST /api/v1/devices/{devId}/events",
+			},
+		})
+	})
+
 	router.Route("/api", func(apiRouter chi.Router) {
 		// Health
 		apiRouter.Route("/ping", func(healthRouter chi.Router) {
