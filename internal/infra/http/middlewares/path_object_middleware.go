@@ -3,7 +3,7 @@ package middlewares
 import (
 	"context"
 	"fmt"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/http/controllers"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/http/controllers"
 	"github.com/go-chi/chi/v5"
 	"github.com/upper/db/v4"
 	"log"

@@ -1,7 +1,7 @@
 package requests
 
 import (
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/domain"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/domain"
 	"github.com/google/uuid"
 )
 

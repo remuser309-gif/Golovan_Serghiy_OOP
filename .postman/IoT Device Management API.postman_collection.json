@@ -17,7 +17,7 @@
 								"exec": [
 									"let jsonData = pm.response.json();",
 									"pm.environment.set(\"token\", jsonData.token);",
-									"pm.environment.set(\"userId\", jsonData.user.id);"
+									"pm.environment.set(\"userId\", String(jsonData.user.id));"
 								],
 								"type": "text/javascript"
 							}
@@ -49,7 +49,7 @@
 								"exec": [
 									"let jsonData = pm.response.json();",
 									"pm.environment.set(\"token\", jsonData.token);",
-									"pm.environment.set(\"userId\", jsonData.user.id);"
+									"pm.environment.set(\"userId\", String(jsonData.user.id));"
 								],
 								"type": "text/javascript"
 							}
@@ -78,7 +78,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"exec": ["pm.environment.set(\"token\", null);"],
+								"exec": ["pm.environment.set(\"token\", \"\");"],
 								"type": "text/javascript"
 							}
 						}
@@ -156,7 +156,7 @@
 							"script": {
 								"exec": [
 									"let jsonData = pm.response.json();",
-									"pm.environment.set(\"orgId\", jsonData.id);"
+									"pm.environment.set(\"orgId\", String(jsonData.id));"
 								],
 								"type": "text/javascript"
 							}
@@ -211,7 +211,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"SmartHome Lab Updated\",\n    \"description\": \"Updated description\",\n    \"city\": \"Lviv\",\n    \"address\": \"Shevchenka St, 15\",\n    \"lat\": 49.84,\n    \"lon\": 24.03\n}",
+							"raw": "{\n    \"name\": \"SmartHome Lab Updated\",\n    \"description\": \"Updated description\",\n    \"city\": \"Lviv\",\n    \"address\": \"Friend St, 10\",\n    \"lat\": 49.84,\n    \"lon\": 24.03\n}",
 							"options": { "raw": { "language": "json" } }
 						},
 						"url": {
@@ -248,7 +248,7 @@
 							"script": {
 								"exec": [
 									"let jsonData = pm.response.json();",
-									"pm.environment.set(\"roomId\", jsonData.id);"
+									"pm.environment.set(\"roomId\", String(jsonData.id));"
 								],
 								"type": "text/javascript"
 							}
@@ -340,7 +340,7 @@
 							"script": {
 								"exec": [
 									"let jsonData = pm.response.json();",
-									"pm.environment.set(\"devId\", jsonData.id);"
+									"pm.environment.set(\"devId\", String(jsonData.id));"
 								],
 								"type": "text/javascript"
 							}
@@ -370,7 +370,7 @@
 							"script": {
 								"exec": [
 									"let jsonData = pm.response.json();",
-									"pm.environment.set(\"actId\", jsonData.id);"
+									"pm.environment.set(\"actId\", String(jsonData.id));"
 								],
 								"type": "text/javascript"
 							}
@@ -485,12 +485,24 @@
 			"item": [
 				{
 					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"measId\", String(jsonData.id));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"value\": 23.5\n}",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"value\": 23.5\n}",
 							"options": { "raw": { "language": "json" } }
 						},
 						"url": {
@@ -551,7 +563,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"value\": 25.0\n}",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"value\": 25.0\n}",
 							"options": { "raw": { "language": "json" } }
 						},
 						"url": {
@@ -582,12 +594,24 @@
 			"item": [
 				{
 					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"pm.environment.set(\"eventId\", String(jsonData.id));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"action\": \"Device activated\"\n}",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"action\": \"Device activated\"\n}",
 							"options": { "raw": { "language": "json" } }
 						},
 						"url": {
@@ -617,7 +641,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/devices/{{devId}}/events?action=Device activated",
+							"raw": "{{base_url}}/devices/{{devId}}/events?action=Device%20activated",
 							"host": ["{{base_url}}"],
 							"path": ["devices", "{{devId}}", "events"],
 							"query": [
@@ -664,7 +688,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"deviceId\": {{devId}},\n    \"roomId\": {{roomId}},\n    \"action\": \"Device deactivated\"\n}",
+							"raw": "{\n    \"deviceId\": {{devId}},\n    \"action\": \"Device deactivated\"\n}",
 							"options": { "raw": { "language": "json" } }
 						},
 						"url": {

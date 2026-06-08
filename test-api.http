@@ -1,0 +1,282 @@
+### Переменные
+@base_url = http://localhost:8080/api/v1
+@token = 
+@userId = 
+@orgId = 
+@roomId = 
+@devId = 
+@measId = 
+@eventId = 
+
+### ========== AUTH ==========
+
+### 1. Register
+POST {{base_url}}/auth/register
+Content-Type: application/json
+
+{
+    "firstName": "Test",
+    "secondName": "User",
+    "email": "test@test.com",
+    "password": "test1234"
+}
+
+### 2. Login
+POST {{base_url}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "test1234"
+}
+
+### 3. Logout
+POST {{base_url}}/auth/logout
+Authorization: Bearer {{token}}
+
+### ========== USER ==========
+
+### 4. Get Me
+GET {{base_url}}/users
+Authorization: Bearer {{token}}
+
+### 5. Update User
+PUT {{base_url}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "firstName": "Updated",
+    "secondName": "User",
+    "email": "test@test.com"
+}
+
+### 6. Delete User
+DELETE {{base_url}}/users
+Authorization: Bearer {{token}}
+
+### ========== ORGANIZATIONS ==========
+
+### 7. Create Organization
+POST {{base_url}}/organizations
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "SmartHome Lab",
+    "description": "Smart home laboratory",
+    "city": "Kyiv",
+    "address": "Shevchenka St, 12",
+    "lat": 50.45,
+    "lon": 30.52
+}
+
+### 8. List Organizations
+GET {{base_url}}/organizations
+Authorization: Bearer {{token}}
+
+### 9. Get Organization By ID
+GET {{base_url}}/organizations/{{orgId}}
+Authorization: Bearer {{token}}
+
+### 10. Update Organization
+PUT {{base_url}}/organizations/{{orgId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "SmartHome Lab Updated",
+    "description": "Updated description",
+    "city": "Lviv",
+    "address": "Friend St, 10",
+    "lat": 49.84,
+    "lon": 24.03
+}
+
+### 11. Delete Organization
+DELETE {{base_url}}/organizations/{{orgId}}
+Authorization: Bearer {{token}}
+
+### ========== ROOMS ==========
+
+### 12. Create Room
+POST {{base_url}}/organizations/{{orgId}}/rooms
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Server Room",
+    "description": "Main server room"
+}
+
+### 13. List Rooms By Organization
+GET {{base_url}}/organizations/{{orgId}}/rooms
+Authorization: Bearer {{token}}
+
+### 14. Get Room By ID
+GET {{base_url}}/organizations/{{orgId}}/rooms/{{roomId}}
+Authorization: Bearer {{token}}
+
+### 15. Update Room
+PUT {{base_url}}/organizations/{{orgId}}/rooms/{{roomId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "name": "Updated Room",
+    "description": "Updated description"
+}
+
+### 16. Delete Room
+DELETE {{base_url}}/organizations/{{orgId}}/rooms/{{roomId}}
+Authorization: Bearer {{token}}
+
+### ========== DEVICES ==========
+
+### 17. Create Device (SENSOR)
+POST {{base_url}}/organizations/{{orgId}}/devices
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "organizationId": {{orgId}},
+    "roomId": {{roomId}},
+    "inventoryNumber": "INV-001",
+    "serialNumber": "SN-001",
+    "characteristics": "Temperature sensor",
+    "category": "SENSOR",
+    "units": "Celsius",
+    "powerConsumption": 0.5
+}
+
+### 18. Create Device (ACTUATOR)
+POST {{base_url}}/organizations/{{orgId}}/devices
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "organizationId": {{orgId}},
+    "roomId": {{roomId}},
+    "inventoryNumber": "INV-002",
+    "serialNumber": "SN-002",
+    "characteristics": "Smart relay",
+    "category": "ACTUATOR",
+    "units": "Percent",
+    "powerConsumption": 2.0
+}
+
+### 19. List Devices By Organization
+GET {{base_url}}/organizations/{{orgId}}/devices
+Authorization: Bearer {{token}}
+
+### 20. Filter Devices By Category
+GET {{base_url}}/organizations/{{orgId}}/devices?category=SENSOR
+Authorization: Bearer {{token}}
+
+### 21. List Devices By Room
+GET {{base_url}}/organizations/{{orgId}}/devices/rooms/{{roomId}}
+Authorization: Bearer {{token}}
+
+### 22. Get Device By ID
+GET {{base_url}}/organizations/{{orgId}}/devices/{{devId}}
+Authorization: Bearer {{token}}
+
+### 23. Update Device
+PUT {{base_url}}/organizations/{{orgId}}/devices/{{devId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "organizationId": {{orgId}},
+    "roomId": {{roomId}},
+    "inventoryNumber": "INV-001-UPD",
+    "serialNumber": "SN-001-UPD",
+    "characteristics": "Updated sensor",
+    "category": "SENSOR",
+    "units": "Celsius",
+    "powerConsumption": 1.0
+}
+
+### 24. Delete Device
+DELETE {{base_url}}/organizations/{{orgId}}/devices/{{devId}}
+Authorization: Bearer {{token}}
+
+### ========== MEASUREMENTS ==========
+
+### 25. Create Measurement
+POST {{base_url}}/devices/{{devId}}/measurements
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "deviceId": {{devId}},
+    "value": 23.5
+}
+
+### 26. List Measurements By Device
+GET {{base_url}}/devices/{{devId}}/measurements
+Authorization: Bearer {{token}}
+
+### 27. Filter Measurements By Date Range
+GET {{base_url}}/devices/{{devId}}/measurements?from=2026-01-01T00:00:00Z&to=2026-12-31T23:59:59Z
+Authorization: Bearer {{token}}
+
+### 28. Get Measurement By ID
+GET {{base_url}}/devices/{{devId}}/measurements/{{measId}}
+Authorization: Bearer {{token}}
+
+### 29. Update Measurement
+PUT {{base_url}}/devices/{{devId}}/measurements/{{measId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "deviceId": {{devId}},
+    "value": 25.0
+}
+
+### 30. Delete Measurement
+DELETE {{base_url}}/devices/{{devId}}/measurements/{{measId}}
+Authorization: Bearer {{token}}
+
+### ========== EVENTS ==========
+
+### 31. Create Event
+POST {{base_url}}/devices/{{devId}}/events
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "deviceId": {{devId}},
+    "action": "Device activated"
+}
+
+### 32. List Events By Device
+GET {{base_url}}/devices/{{devId}}/events
+Authorization: Bearer {{token}}
+
+### 33. Filter Events By Action
+GET {{base_url}}/devices/{{devId}}/events?action=Device%20activated
+Authorization: Bearer {{token}}
+
+### 34. Filter Events By Date Range
+GET {{base_url}}/devices/{{devId}}/events?from=2026-01-01T00:00:00Z&to=2026-12-31T23:59:59Z
+Authorization: Bearer {{token}}
+
+### 35. Get Event By ID
+GET {{base_url}}/devices/{{devId}}/events/{{eventId}}
+Authorization: Bearer {{token}}
+
+### 36. Update Event
+PUT {{base_url}}/devices/{{devId}}/events/{{eventId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "deviceId": {{devId}},
+    "action": "Device deactivated"
+}
+
+### 37. Delete Event
+DELETE {{base_url}}/devices/{{devId}}/events/{{eventId}}
+Authorization: Bearer {{token}}

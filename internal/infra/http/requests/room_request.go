@@ -1,6 +1,6 @@
 package requests
 
-import "github.com/BohdanBoriak/boilerplate-go-back/internal/domain"
+import "github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/domain"
 
 type RoomRequest struct {
 	Name        string `json:"name" validate:"required,gte=1,max=100"`

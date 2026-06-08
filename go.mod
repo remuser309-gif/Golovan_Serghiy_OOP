@@ -1,4 +1,4 @@
-module github.com/BohdanBoriak/boilerplate-go-back
+module github.com/remuser309-gif/Golovan_Serghiy_OOP
 
 go 1.24.0
 

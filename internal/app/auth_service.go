@@ -2,8 +2,8 @@ package app
 
 import (
 	"errors"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/domain"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/database"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/domain"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/database"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/google/uuid"
 	"github.com/upper/db/v4"

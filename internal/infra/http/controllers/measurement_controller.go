@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/app"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/domain"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/http/requests"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/http/resources"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/app"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/domain"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/http/requests"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/http/resources"
 	"log"
 	"net/http"
 	"strconv"

@@ -1,6 +1,6 @@
 package requests
 
-import "github.com/BohdanBoriak/boilerplate-go-back/internal/domain"
+import "github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/domain"
 
 type MeasurementRequest struct {
 	DeviceId uint64  `json:"deviceId" validate:"required"`

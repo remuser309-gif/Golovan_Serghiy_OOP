@@ -3,9 +3,9 @@ package middlewares
 import (
 	"context"
 	"errors"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/app"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/domain"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/http/controllers"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/app"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/domain"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/http/controllers"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/google/uuid"
 	"github.com/lestrrat-go/jwx/v2/jwt"

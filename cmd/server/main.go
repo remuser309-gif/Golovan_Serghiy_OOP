@@ -9,10 +9,10 @@ import (
 	"runtime/debug"
 	"syscall"
 
-	"github.com/BohdanBoriak/boilerplate-go-back/config"
-	"github.com/BohdanBoriak/boilerplate-go-back/config/container"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/database"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/http"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/config"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/config/container"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/database"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/http"
 )
 
 func main() {

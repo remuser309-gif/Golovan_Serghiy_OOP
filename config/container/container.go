@@ -1,11 +1,11 @@
 package container
 
 import (
-	"github.com/BohdanBoriak/boilerplate-go-back/config"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/app"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/database"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/http/controllers"
-	"github.com/BohdanBoriak/boilerplate-go-back/internal/infra/http/middlewares"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/config"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/app"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/database"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/http/controllers"
+	"github.com/remuser309-gif/Golovan_Serghiy_OOP/internal/infra/http/middlewares"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/upper/db/v4"
 	"github.com/upper/db/v4/adapter/postgresql"
