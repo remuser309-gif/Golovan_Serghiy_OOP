@@ -4,12 +4,17 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 )
 
 func Server(ctx context.Context, router http.Handler) error {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%d", 8080),
+		Addr:    fmt.Sprintf(":%s", port),
 		Handler: router,
 	}
 

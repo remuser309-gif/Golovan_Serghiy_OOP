@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: iot-device-api
+    env: docker
+    repo: https://github.com/remuser309-gif/Golovan_Serghiy_OOP.git
+    plan: free
+    envVars:
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: iot-db
+          property: hostport
+      - key: DB_NAME
+        value: iot_db
+      - key: DB_USER
+        value: postgres
+      - key: DB_PASSWORD
+        fromService:
+          type: pserv
+          name: iot-db
+          property: password
+      - key: JWT_SECRET
+        generateValue: true
+
+  - type: postgres
+    name: iot-db
+    plan: free
+    ipAllowList: []
